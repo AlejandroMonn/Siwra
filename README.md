@@ -1,2 +1,4 @@
-# Bot-para-autoescribir-codigo
-Este bot sirve para que puedas registar tiempo en sistemas de conteo de tiempo de codigo de manera automatica
+# Siwra
+Este bot sirve para que puedas "hackear" esos softwares espias que buscan trackearte el tiempo de conexion y actividad
+
+Ya sea para escritura, cliceko, moviemiento de el mouse
