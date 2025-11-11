@@ -1,79 +1,102 @@
 import pyautogui
 import keyboard
+import pygetwindow as gw
 import random
 import time
 import sys
 
+NOMBRE_APP = "Visual Studio Code"
+
 frases = [
-    "Hola, esto es una prueba.",
-    "Automatización combinada: teclado + mouse.",
-    "Mensaje de prueba."
+    "Solo estoy probando algo.",
+    "Esta automatización parece humana.",
+    "Escribiendo como si fuera de verdad.",
+    "Simulación de tipeo natural en progreso."
 ]
 
-escribir_interval = 0.003
-entre_frases = 0.25
-mouse_move_duration = 0.06
-mouse_wait = 0.03
+detener = False
+
+def detener_script():
+    global detener
+    detener = True
+    print("\n⛔ Script detenido por el usuario.")
+
+keyboard.add_hotkey("ctrl+alt+s", detener_script)
 
 
-def combinado():
-    print("Iniciando automatización (mouse + teclado).")
-    print("P = Pausar | R = Reanudar | S = Salir")
-    time.sleep(2)
+def obtener_ventana():
+    ventanas = gw.getWindowsWithTitle(NOMBRE_APP)
+
+    if not ventanas:
+        print(f"❌ No se encontró una ventana con el nombre: {NOMBRE_APP}")
+        sys.exit()
+
+    win = ventanas[0]
+    win.activate()
+    time.sleep(0.3)
+    return win
+
+
+def escribir_humano(texto):
+    """Simula escritura humana variando velocidad y con pausas micro"""
+    for letra in texto:
+        pyautogui.write(letra)
+        time.sleep(random.uniform(0.03, 0.14))  # velocidad humana
+
+
+def borrar_humano(cantidad):
+    """Simula borrar uno por uno como persona"""
+    for _ in range(cantidad):
+        pyautogui.press("backspace")
+        time.sleep(random.uniform(0.02, 0.09))
+
+
+def mover_mouse_humano(win):
+    """Movimiento suave dentro de VS Code"""
+    x_dest = random.randint(win.left + 80, win.left + win.width - 80)
+    y_dest = random.randint(win.top + 80, win.top + win.height - 80)
+    duracion = random.uniform(0.15, 0.55)
+
+    pyautogui.moveTo(x_dest, y_dest, duration=duracion)
+
+
+def automatizar():
+    win = obtener_ventana()
+
+    print(f"✅ Automatizando únicamente en: {win.title}")
+    print("⏸ Pausar: P | ▶ Reanudar: R | ❌ Detener: CTRL + ALT + S")
 
     activo = True
-    screen_w, screen_h = pyautogui.size()
 
-    try:
-        while True:
+    while not detener:
+        win.activate()
 
-            if keyboard.is_pressed("s"):
-                print("\n⛔ Script detenido por el usuario.")
-                break
+        if keyboard.is_pressed("p"):
+            activo = False
+            print("⏸ Pausado")
+            time.sleep(0.5)
 
-            if keyboard.is_pressed("p") and activo:
-                activo = False
-                print("\n⏸ PAUSADO. Presiona R para reanudar.")
-                time.sleep(0.4)
+        if keyboard.is_pressed("r"):
+            activo = True
+            print("▶ Reanudado")
+            time.sleep(0.5)
 
-            if keyboard.is_pressed("r") and not activo:
-                activo = True
-                print("\n▶ REANUDADO.")
-                time.sleep(0.4)
+        if not activo:
+            time.sleep(0.1)
+            continue
 
-            if not activo:
-                time.sleep(0.1)
-                continue
+        frase = random.choice(frases)
+        escribir_humano(frase)
+        time.sleep(random.uniform(0.4, 1.2))  # como si pensaras luego de escribir
+        borrar_humano(len(frase))
 
-            # Movimiento del mouse
-            x = random.randint(0, screen_w - 1)
-            y = random.randint(0, screen_h - 1)
-            pyautogui.moveTo(x, y, duration=mouse_move_duration)
-            time.sleep(mouse_wait)
+        mover_mouse_humano(win)
 
-            # Escribir frase
-            frase = random.choice(frases)
-            pyautogui.write(frase, interval=escribir_interval)
+        time.sleep(random.uniform(0.6, 2.2))  # descanso entre "acciones"
 
-            # ✅ Selecciona el texto y lo borra SIN afectar otras líneas
-            with pyautogui.hold("shift"):
-                for _ in range(len(frase)):
-                    pyautogui.press("left")
-
-            pyautogui.press("delete")
-
-            time.sleep(entre_frases)
-
-    except pyautogui.FailSafeException:
-        print("\n⚠ FailSafe activado (mouse esquina superior izquierda).")
-    except Exception as e:
-        print(f"\nError inesperado: {e}")
-    finally:
-        print("Script finalizado.")
-        sys.exit(0)
+    print("Script finalizado.")
+    sys.exit()
 
 
 if __name__ == "__main__":
-    combinado()
-
-
+    automatizar()
