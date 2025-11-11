@@ -11,10 +11,12 @@ frases = [
     "Otra frase para enviar.",
     "Mensaje de prueba."
 ]
+
 escribir_interval = 0.005    # intervalo entre caracteres al escribir
 entre_frases = 0.3           # tiempo entre frases
-mouse_move_duration = 0.08   # duración del movimiento del mouse a cada punto
+mouse_move_duration = 0.08   # duración del movimiento del mouse
 mouse_wait = 0.05            # espera entre movimientos
+borrar_enter = True          # True = también borra el Enter (sube y borra)
 # -----------------------
 
 def combinado():
@@ -23,13 +25,12 @@ def combinado():
     print("Nota: mover el mouse a la esquina superior izquierda también aborta (PyAutoGUI failsafe).")
     time.sleep(2)  # tiempo para colocar el foco donde quieras
 
-    activo = True  # controla pausa/reanudar
+    activo = True
 
     screen_w, screen_h = pyautogui.size()
 
     try:
         while True:
-            # Chequeos de control (no bloqueantes)
             if keyboard.is_pressed("s"):
                 print("\n⛔ Script detenido por el usuario (S).")
                 break
@@ -38,7 +39,7 @@ def combinado():
                 if activo:
                     activo = False
                     print("\n⏸ Pausado. Presiona R para reanudar.")
-                    time.sleep(0.4)  # evitar múltiples detecciones rápidas
+                    time.sleep(0.4)
 
             if keyboard.is_pressed("r"):
                 if not activo:
@@ -46,30 +47,35 @@ def combinado():
                     print("\n▶ Reanudado.")
                     time.sleep(0.4)
 
-            # Si está pausado, esperar en ciclo corto
             if not activo:
                 time.sleep(0.15)
                 continue
 
-            # --- Acción 1: mover el mouse a una posición aleatoria ---
+            # --- Movimiento random del mouse ---
             x = random.randint(0, screen_w - 1)
             y = random.randint(0, screen_h - 1)
             pyautogui.moveTo(x, y, duration=mouse_move_duration)
-            time.sleep(mouse_wait)  # pequeña espera entre movimientos
+            time.sleep(mouse_wait)
 
-            # --- Acción 2: escribir una frase aleatoria ---
+            # --- Escribir una frase random ---
             frase = random.choice(frases)
             pyautogui.write(frase, interval=escribir_interval)
             pyautogui.press("enter")
+
+            # --- Borrar la frase ---
+            if borrar_enter:
+                # subimos de nuevo para borrar la línea
+                pyautogui.press("up")
+
+            for _ in range(len(frase)):
+                pyautogui.press("backspace")
+
             time.sleep(entre_frases)
 
-            # PyAutoGUI failsafe: si mueves a esquina superior izquierda, lanza excepción y sale
     except pyautogui.FailSafeException:
-        print("\n⚠️ Failsafe activado (mouse en esquina superior izquierda). Terminando.")
-    except KeyboardInterrupt:
-        print("\nInterrupción por teclado (Ctrl+C).")
+        print("\n⚠️ Failsafe activado (mouse en esquina superior izquierda).")
     except Exception as e:
-        print(f"\nOcurrió un error: {e}")
+        print(f"\nError: {e}")
     finally:
         print("Script finalizado.")
         sys.exit(0)
