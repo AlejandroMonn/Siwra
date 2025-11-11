@@ -10,61 +10,63 @@ NOMBRE_APP = "Visual Studio Code"
 frases = [
     "Solo estoy probando algo.",
     "Esta automatización parece humana.",
-    "Escribiendo como si fuera de verdad.",
     "Simulación de tipeo natural en progreso."
 ]
 
 detener = False
 
-def detener_script():
+# ✅ NUEVA combinación de salida
+keyboard.add_hotkey("ctrl+¿", lambda: terminar_script())
+
+def terminar_script():
     global detener
     detener = True
     print("\n⛔ Script detenido por el usuario.")
 
-keyboard.add_hotkey("ctrl+alt+s", detener_script)
-
 
 def obtener_ventana():
-    ventanas = gw.getWindowsWithTitle(NOMBRE_APP)
-
-    if not ventanas:
-        print(f"❌ No se encontró una ventana con el nombre: {NOMBRE_APP}")
+    win_list = gw.getWindowsWithTitle(NOMBRE_APP)
+    if not win_list:
+        print(f"❌ No se encontró la ventana: {NOMBRE_APP}")
         sys.exit()
 
-    win = ventanas[0]
+    win = win_list[0]
     win.activate()
     time.sleep(0.3)
     return win
 
 
 def escribir_humano(texto):
-    """Simula escritura humana variando velocidad y con pausas micro"""
+    """Escribe y devuelve cuántas teclas reales fueron enviadas."""
+    total_teclas = 0
+
     for letra in texto:
         pyautogui.write(letra)
-        time.sleep(random.uniform(0.03, 0.14))  # velocidad humana
+        total_teclas += 1   # contamos la tecla realmente enviada
+        time.sleep(random.uniform(0.03, 0.14))
+
+    return total_teclas
 
 
-def borrar_humano(cantidad):
-    """Simula borrar uno por uno como persona"""
-    for _ in range(cantidad):
+def borrar_humano(teclas):
+    """Borra exactamente la cantidad de teclas enviadas, no el número de caracteres."""
+    for _ in range(teclas):
         pyautogui.press("backspace")
         time.sleep(random.uniform(0.02, 0.09))
 
 
 def mover_mouse_humano(win):
-    """Movimiento suave dentro de VS Code"""
-    x_dest = random.randint(win.left + 80, win.left + win.width - 80)
-    y_dest = random.randint(win.top + 80, win.top + win.height - 80)
-    duracion = random.uniform(0.15, 0.55)
+    x = random.randint(win.left + 80, win.left + win.width - 80)
+    y = random.randint(win.top + 80, win.top + win.height - 80)
 
-    pyautogui.moveTo(x_dest, y_dest, duration=duracion)
+    pyautogui.moveTo(x, y, duration=random.uniform(0.15, 0.55))
 
 
 def automatizar():
     win = obtener_ventana()
 
-    print(f"✅ Automatizando únicamente en: {win.title}")
-    print("⏸ Pausar: P | ▶ Reanudar: R | ❌ Detener: CTRL + ALT + S")
+    print(f"✅ Automatizando solo en: {win.title}")
+    print("⏸ Pausar: P | ▶ Reanudar: R | ❌ Finalizar: CTRL + ¿")
 
     activo = True
 
@@ -74,25 +76,25 @@ def automatizar():
         if keyboard.is_pressed("p"):
             activo = False
             print("⏸ Pausado")
-            time.sleep(0.5)
+            time.sleep(0.4)
 
         if keyboard.is_pressed("r"):
             activo = True
             print("▶ Reanudado")
-            time.sleep(0.5)
+            time.sleep(0.4)
 
         if not activo:
-            time.sleep(0.1)
             continue
 
         frase = random.choice(frases)
-        escribir_humano(frase)
-        time.sleep(random.uniform(0.4, 1.2))  # como si pensaras luego de escribir
-        borrar_humano(len(frase))
+        teclas_enviadas = escribir_humano(frase)
+
+        time.sleep(random.uniform(0.4, 1.2))
+        borrar_humano(teclas_enviadas)  # ✅ ahora se borra EXACTO
 
         mover_mouse_humano(win)
 
-        time.sleep(random.uniform(0.6, 2.2))  # descanso entre "acciones"
+        time.sleep(random.uniform(0.8, 2.5))
 
     print("Script finalizado.")
     sys.exit()
