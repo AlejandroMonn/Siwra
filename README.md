@@ -18,7 +18,13 @@ Siwra's purpose is to facilitate simple automation without complex code, using c
 
 # 📦 Installation
 
+pip install pyautogui keyboard pygetwindow
+
 Install Siwra globally with:
 
 ```bash
 pip install siwra
+
+Ejecution with
+
+python siwra_cli.py click
