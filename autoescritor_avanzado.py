@@ -4,7 +4,6 @@ import time
 import random
 import sys
 
-# Lista de frases que el bot escribirá aleatoriamente
 frases = [
     "Hola, ¿cómo estás?",
     "Estoy automatizando tareas.",
@@ -18,7 +17,7 @@ def auto_escritor():
     print("P = Pausar  |  R = Reanudar  |  S = Salir")
     time.sleep(2)
 
-    activo = True  # controla pausa/reanudación
+    activo = True  
 
     while True:
         if keyboard.is_pressed("s"):
@@ -37,9 +36,9 @@ def auto_escritor():
 
         if activo:
             frase = random.choice(frases)
-            pyautogui.write(frase, interval=0.01)  # velocidad de escritura
-            pyautogui.press("enter")  # salto de línea
-            time.sleep(0.3)  # tiempo entre envíos (ajustable)
+            pyautogui.write(frase, interval=0.01)  
+            pyautogui.press("enter")  
+            time.sleep(0.3)  
 
 
 def main():
@@ -59,3 +58,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
