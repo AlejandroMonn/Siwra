@@ -18,7 +18,9 @@ def algoritmo_escritura():
             print("\nScript detenido por el usuario.")
             sys.exit()
 
-if __name__ == "__main__":
+
+def main():
+    """Función principal para ejecutar desde CLI o standalone."""
     print("--- Auto Escritor Sin Saturación ---")
     print("Haz clic en el editor donde se escribirán las letras.")
     print("Presiona 'S' en cualquier momento para detener.")
@@ -30,3 +32,7 @@ if __name__ == "__main__":
         print(f"\nOcurrió un error: {e}")
     finally:
         print("Script finalizado.")
+
+
+if __name__ == "__main__":
+    main()
