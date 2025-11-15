@@ -7,18 +7,16 @@ import sys
 def mover_mouse():
     print("Movimiento automático iniciado.")
     print("Presiona 'S' para detener el script.")
-    time.sleep(2)  # tiempo para prepararte
-
-    width, height = pyautogui.size()  # tamaño de pantalla
+    time.sleep(2)  
+    width, height = pyautogui.size()  
 
     while True:
-        # Coordenadas aleatorias dentro del tamaño de la pantalla
+        
         x = random.randint(0, width - 1)
         y = random.randint(0, height - 1)
 
-        pyautogui.moveTo(x, y, duration=0.1)  # mueve suavemente (ajustable)
-
-        # Detener con 'S'
+        pyautogui.moveTo(x, y, duration=0.1)  
+        
         if keyboard.is_pressed("s"):
             print("\nMovimiento detenido por el usuario.")
             sys.exit()
@@ -41,3 +39,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
