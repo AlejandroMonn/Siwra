@@ -17,7 +17,8 @@ def auto_click():
             sys.exit()
 
 
-if __name__ == "__main__":
+def main():
+    """Función principal para ejecutar desde CLI o standalone."""
     print("--- Auto Clicker Loop Infinito ---")
     print("Haz clic en la ventana donde quieras usar el click.")
     print("Presiona 'S' en cualquier momento para detener.")
@@ -29,3 +30,7 @@ if __name__ == "__main__":
         print(f"\nOcurrió un error: {e}")
     finally:
         print("Script finalizado.")
+
+
+if __name__ == "__main__":
+    main()
