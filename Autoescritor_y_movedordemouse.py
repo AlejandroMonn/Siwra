@@ -15,7 +15,7 @@ frases = [
 
 detener = False
 
-# ✅ Nuevo método para finalizar: ALT + SHIFT + Q (no interfiere con ninguna letra)
+
 keyboard.add_hotkey("alt+shift+q", lambda: terminar_script())
 
 
@@ -42,7 +42,7 @@ def escribir_humano(texto):
     total_teclas = 0
 
     for letra in texto:
-        keyboard.write(letra)  # ✅ PROTEGE LA Ñ, Ó, Á, É, Í...
+        keyboard.write(letra)  
         total_teclas += 1
         time.sleep(random.uniform(0.035, 0.16))
 
