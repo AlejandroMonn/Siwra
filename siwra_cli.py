@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-# Import automation modules
+
 import Autoclickeador
 import autoescritor
 import autoescritor_avanzado
@@ -14,28 +14,26 @@ def main():
         description="siwra CLI: Herramienta de automatización de scripts de mouse y teclado.",
     )
 
-    # Definir los comandos disponibles
+    
     subparsers = parser.add_subparsers(
         dest='command',
         required=True,
         help='Comando de automatización a ejecutar'
     )
 
-    # COMANDO 1: Autoclicker
+    
     parser_click = subparsers.add_parser('click', help='Ejecuta el script de Autoclickeador.')
     
-    # COMANDO 2: Autoescritor (Básico)
+    
     parser_write = subparsers.add_parser('write', help='Ejecuta el script de Autoescritor básico.')
     
-    # COMANDO 3: Autoescritor Avanzado
+    
     parser_write_adv = subparsers.add_parser('write-adv', help='Ejecuta el script de Autoescritor avanzado.')
 
-    # COMANDO 4: Mover Mouse
     parser_move = subparsers.add_parser('move', help='Ejecuta el script de Automovedormouse.')
 
     args = parser.parse_args()
 
-    # Ejecutar el módulo correspondiente
     try:
         if args.command == 'click':
             Autoclickeador.main()
@@ -57,3 +55,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
