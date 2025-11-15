@@ -42,7 +42,8 @@ def auto_escritor():
             time.sleep(0.3)  # tiempo entre envíos (ajustable)
 
 
-if __name__ == "__main__":
+def main():
+    """Función principal para ejecutar desde CLI o standalone."""
     print("--- AUTO ESCRITOR AVANZADO ---")
     print("Haz clic en el editor donde se escribirán los mensajes.")
     print("P = Pausar  |  R = Reanudar  |  S = SALIR")
@@ -54,3 +55,7 @@ if __name__ == "__main__":
         print(f"Error: {e}")
     finally:
         print("Script finalizado.")
+
+
+if __name__ == "__main__":
+    main()
