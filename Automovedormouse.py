@@ -24,7 +24,8 @@ def mover_mouse():
             sys.exit()
 
 
-if __name__ == "__main__":
+def main():
+    """Función principal para ejecutar desde CLI o standalone."""
     print("--- Mouse Mover Infinito ---")
     print("El mouse se moverá por toda la pantalla.")
     print("Presiona 'S' en cualquier momento para detener.")
@@ -36,3 +37,7 @@ if __name__ == "__main__":
         print(f"\nOcurrió un error: {e}")
     finally:
         print("Script finalizado.")
+
+
+if __name__ == "__main__":
+    main()
