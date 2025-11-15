@@ -6,11 +6,11 @@ import sys
 def auto_click():
     print("Auto-click activo. Posiciona el mouse donde quieras que haga clic.")
     print("Presiona 'S' para detener el script.")
-    time.sleep(2)  # tiempo para que muevas el mouse al sitio deseado
+    time.sleep(2)  
 
     while True:
-        pyautogui.click()  # clic izquierdo
-        time.sleep(0.01)   # velocidad del clic (reduce a 0.001 si quieres súper rápido)
+        pyautogui.click()  
+        time.sleep(0.01)   
 
         if keyboard.is_pressed("s"):
             print("\nAuto-click detenido por el usuario.")
@@ -34,3 +34,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
