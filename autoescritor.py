@@ -4,36 +4,38 @@ import time
 import sys
 
 def algoritmo_escritura():
-    letras = "ABC"
+    letras = "AbC"
+    print("Iniciando escritura automática..")
 
     while True:
-        
-        pyautogui.write(letras, interval=0.001)
+        try:
+            pyautogui.write(letras, interval=0.002)
+            time.sleep(0.001)
+            pyautogui.press("backspace", presses=len(letras), interval=0.002)
+        except:
+            print("Algo falló al escribir, pero sigo intentando")
+            time.sleep(0.3)
 
-        
-        pyautogui.press("backspace", presses=len(letras), interval=0.001)
-
-        
         if keyboard.is_pressed("s"):
-            print("\nScript detenido por el usuario.")
+            print("\nOk, el usuario pidió detener")
             sys.exit()
 
 
 def main():
-    """Función principal para ejecutar desde CLI o standalone."""
-    print("--- Auto Escritor Sin Saturación ---")
-    print("Haz clic en el editor donde se escribirán las letras.")
-    print("Presiona 'S' en cualquier momento para detener.")
+    print("--- Auto Escritor Básico ---")
+    print("Haz clic en el lugar donde quieras que escriba")
+    print("Presiona S para detener el script")
     time.sleep(2)
 
     try:
         algoritmo_escritura()
     except Exception as e:
-        print(f"\nOcurrió un error: {e}")
+        print("Hubo un error:", e)
     finally:
-        print("Script finalizado.")
+        print("Script terminado.")
 
 
 if __name__ == "__main__":
     main()
+
 
