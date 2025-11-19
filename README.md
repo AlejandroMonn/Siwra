@@ -1,14 +1,14 @@
 Mouse and Keyboard Automation Tool
-SIWRA is a (CLI) tool for automating repetitive tasks on your local computer.
+SIWRA is a (CLI) tool for automating repetitive tasks on your local computer
 
 
-Auto-clicker: Infinite automatic clicking 
-Basic Auto-writer: Automatically writes and deletes text
-Advanced Auto-writer: Writes random phrases with pause/resume controls and also deltes them
-Auto-move mouse: moves the mouse around the screen wothout a pattern
+Auto clicker: Infinite automatic clicking 
+Basic Auto writer: Automatically writes and deletes text
+Advanced Auto writer: Writes random phrases with pause/resume controls and also deltes them
+Auto move mouse: moves the mouse around the screen wothout a pattern
 
- Windows, macOS, or Linux and at least python 3.11
-Installation (Python Method)
+Windows, macOS, or Linux and at least python 3.11
+Installation if you want to install it with python
 Step 1: Install python
 If you have Python installed go with step 2
 Step 2: Download SIWRA
@@ -21,7 +21,7 @@ python siwra_cli.py --help
 
 You should see the help menu with the available commands.
 
-📦 Installation (Standalone Executable)
+Installation (Standalone Executable)
 Download the executable file for your operating system:
 
 Windows siwra.exe macOS/Linux: siwra (give it execute permissions: chmod +x siwra)
@@ -83,21 +83,16 @@ Security
 All scripts can be stopped by pressing 'S' or ALT+SHIFT+Q/S. If a script is unresponsive reboot the PC
 
 Project Structure:
-siwra/
-├── siwra_cli.py # Main CLI
-├── Autoclicker.py # Auto-click script
-├── autowriter.py # Basic auto-write script
-├── advanced_autowriter.py # Advanced auto-write script
-├── Automovedormouse.py # Mouse movement script
-├── requirements.txt # Python dependencies
-└── README.md # This documentation
+siwra/siwra_cli.py # Main CLI
+Autoclicker.py # Auto-click script
+autowriter.py # Basic auto-write script
+advanced_autowriter.py # Advanced auto-write script
+Automovedormouse.py # Mouse movement script
+requirements.txt # Python dependencies that ypu need to install (dependencies: pyautogui, keyboard and pillow )
+README.md # This document
 
-Dependencies
-pyautogui
-keyboard
-pillow 
 
-📝 License
+License
 This project is open source
 
 Version: 1.0.0
