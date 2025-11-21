@@ -1,12 +1,12 @@
 Mouse and Keyboard Automation Tool
 SIWRA is a (CLI) tool for automating repetitive tasks on your local computer
 
-
+Functionalities:
 Auto clicker: Infinite automatic clicking 
 Basic Auto writer: Automatically writes and deletes text
 Advanced Auto writer: Writes random phrases with pause/resume controls and also deltes them
 Auto move mouse: moves the mouse around the screen wothout a pattern
-
+requierements:
 Windows, macOS, or Linux and at least python 3.11
 Installation if you want to install it with python
 Step 1: Install python
@@ -26,6 +26,17 @@ Download the executable file for your operating system:
 
 Windows siwra.exe macOS/Linux: siwra (give it execute permissions: chmod +x siwra)
 
+
+
+
+
+  !IMPORNTANT!
+when you want to execute it downlanding the siwra_cli.exe file, open the terminal and excuted from there
+ ! IMPORTANT !
+
+
+
+ 
 Available Commands
 1. Auto-clicker
 Performs infinite automatic clicks. Press 'S' to stop.
