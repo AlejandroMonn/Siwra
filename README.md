@@ -93,15 +93,6 @@ Security
 
 All scripts can be stopped by pressing 'S' or ALT+SHIFT+Q/S. If a script is unresponsive reboot the PC
 
-Project Structure:
-siwra/siwra_cli.py # Main CLI
-Autoclicker.py # Auto-click script
-autowriter.py # Basic auto-write script
-advanced_autowriter.py # Advanced auto-write script
-Automovedormouse.py # Mouse movement script
-requirements.txt # Python dependencies that ypu need to install (dependencies: pyautogui, keyboard and pillow )
-README.md # This document
-
 
 License
 This project is open source
